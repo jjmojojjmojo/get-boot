@@ -1,0 +1,64 @@
+* {
+    margin: none;
+    padding: none;
+}
+
+html {
+    width: 100%;
+    height: 100%;
+}
+
+a {
+    color: #999999;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+    background-color: #edc418;
+    color: #666666;
+    font-family: sans-serif;
+    font-size: 12pt;
+    background-image: url('http://boot-clj.com/assets/images/logos/boot-logo-3.png');
+    background-repeat: no-repeat;
+    background-position:center center;
+}
+
+#content {
+    width: 80%;
+    height: 80%;
+    position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 2em;
+    border-radius: 25px;
+    border: 10px #FFFFFF solid;
+}
+
+#status {
+    width: 20%;
+    height: 20%;
+    position: absolute;
+    right: 1em;
+    top: 1em;
+    padding: 1em;
+    border: 3px #666666 solid;
+    border-radius: 25px;
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+#status h1 {
+    font-size: 12pt;
+}
+
+#footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    padding: 1em;
+}
