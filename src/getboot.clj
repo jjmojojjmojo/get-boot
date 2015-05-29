@@ -1,14 +1,14 @@
 (ns getboot
-  (:require 
+  (:require
     [ring.adapter.jetty     :as jetty]
     [ring.middleware.params :refer [wrap-params]]
-    [ring.util.response     :refer [file-response response redirect not-found header]]
+    [ring.util.response     :refer [resource-response response redirect not-found header]]
     [clojure.data.json :as json]
     [tentacles.repos :as repos]
     [clojure.java.io :as io]
     [clojure.core.memoize :as memo])
   (:gen-class))
-  
+
 (defn -get-latest-release
   []
   (first (repos/releases "boot-clj" "boot")))
@@ -39,28 +39,27 @@
         tag_name (:tag_name release)
         data (json/write-str {:url url :version version :tag-name tag_name})]
      (header (response data) "Content-type" "application/json")))
-    
+
 (defn redirect-to-asset
   "Redirect the user to the assets associated with the latest release"
   [request]
-  (let 
+  (let
     [urlmap (get-mapping)
      target (:uri request)
      mapped (get urlmap target)]
-     
+
      (if (not (nil? mapped))
         (redirect mapped)
-        (file-response (str "static/" target)))))
+        (resource-response target))))
 
 (defn basic-map
   "Basic url mapping"
   [request]
-  (println (:uri request))
   (case (:uri request)
-    "/" (file-response "static/index.html")
+    "/" (resource-response "index.html")
     "/info" (current-version request)
     (redirect-to-asset request)))
 
 (defn -main
   [& args]
-  (jetty/run-jetty basic-map {:port 3000}))
+  (jetty/run-jetty basic-map {:port 3001}))
