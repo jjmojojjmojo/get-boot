@@ -1,6 +1,7 @@
-(ns getboot
+(ns getboot.core
   (:require
     [ring.adapter.jetty     :as jetty]
+    [ring.util.servlet      :as servlet]
     [ring.middleware.params :refer [wrap-params]]
     [ring.util.response     :refer [resource-response response redirect not-found header]]
     [clojure.data.json :as json]
