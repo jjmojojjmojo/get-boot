@@ -3,7 +3,8 @@
     [ring.adapter.jetty     :as jetty]
     [ring.util.servlet      :as servlet]
     [ring.middleware.params :refer [wrap-params]]
-    [ring.util.response     :refer [resource-response response redirect not-found header]]
+    [ring.middleware.content-type :refer [content-type-response]]
+    [ring.util.response     :refer [resource-response content-type response redirect not-found header]]
     [clojure.data.json :as json]
     [tentacles.repos :as repos]
     [clojure.java.io :as io]
@@ -51,13 +52,13 @@
 
      (if (not (nil? mapped))
         (redirect mapped)
-        (resource-response target))))
+        (content-type-response (resource-response target) request))))
 
 (defn basic-map
   "Basic url mapping"
   [request]
   (case (:uri request)
-    "/" (resource-response "index.html")
+    "/" (content-type (resource-response "index.html") "text/html")
     "/info" (current-version request)
     (redirect-to-asset request)))
 
