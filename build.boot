@@ -12,13 +12,13 @@
       [org.clojure/data.json "0.2.6"]
       [tentacles "0.3.0"]])
 
-(require '[clojure.java.io :as io])
+(require '[clojure.java.io :as io]
+         '[boot.util :as util])
 
 (task-options!
   pom {:project 'latest-boot
        :version"1.0.0"}
   jar {:main 'getboot.core}
-  uber {:as-jars true}
   war {:file "getboot.war"}
   aot {:all true})
 
@@ -27,9 +27,24 @@
   []
   (with-pre-wrap fileset
     (let [fileset (add-asset fileset (io/file "./meta"))]
+      (util/info "Adding web.xml...\n")
       (commit! fileset))))
 
-(deftask build
+(deftask build-war
   "Create a standalone war file"
   []
-  (comp (aot) (pom) (uber) (webxml) (war)))
+  (comp 
+    (aot) 
+    (pom) 
+    (uber :as-jars true) 
+    (webxml) 
+    (war)))
+
+(deftask standalone
+  "Create a standalone jar file that can be run via java -jar"
+  []
+  (comp 
+    (aot) 
+    (pom) 
+    (uber)
+    (jar)))

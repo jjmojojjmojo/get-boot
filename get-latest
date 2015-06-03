@@ -10,8 +10,8 @@
       [org.clojure/data.json "0.2.6"]
       [tentacles "0.3.0"]])
 
-(require '[getboot])
+(require '[getboot.core])
       
 (defn -main
-  []
-  (getboot/-main))
+  [& args]
+  (apply getboot.core/-main args))
