@@ -1,0 +1,14 @@
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" version="2.5">
+     <display-name>Get Latest Boot</display-name>
+      <description>
+        Application to redirect the user to the latest released version of various boot release artifacts.
+      </description>
+    <servlet>
+        <servlet-name>getboot</servlet-name>
+        <servlet-class>getboot.servlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>getboot</servlet-name>
+        <url-pattern>/*</url-pattern>
+    </servlet-mapping>
+</web-app>

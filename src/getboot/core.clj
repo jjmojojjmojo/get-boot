@@ -7,8 +7,8 @@
     [clojure.data.json :as json]
     [tentacles.repos :as repos]
     [clojure.java.io :as io]
-    [clojure.core.memoize :as memo])
-  (:gen-class))
+    [clojure.core.memoize :as memo]))
+  ;;(:gen-class))
 
 (defn -get-latest-release
   []
@@ -56,6 +56,8 @@
 (defn basic-map
   "Basic url mapping"
   [request]
+  (println "this is what I'm doing")
+  (println request)
   (case (:uri request)
     "/" (resource-response "index.html")
     "/info" (current-version request)

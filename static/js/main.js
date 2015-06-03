@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    $.get("/info",
+    $.get("info",
       function(data){
         $("#version").html(data.version);
         $("#release-link").html(data['tag-name']);
